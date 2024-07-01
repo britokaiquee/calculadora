@@ -1,13 +1,16 @@
-# n = divideNdo | d = Divisor | q = Quociente | r = Resto | a = Adição (próximo 
-# número após o do quociente)
+'''
+n = divideNdo | d = Divisor | q = Quociente | r = Resto | a = Adição (próximo 
+número após o do quociente)
 
-# nn = nome pro valor do dividendo e/ou separador ("x" remete ao sinal de 
-# multiplicação, e é o argumento padrão para o separador)
+nn = nome pro valor do dividendo e/ou separador ("x" remete ao sinal de 
+multiplicação, e é o argumento padrão para o separador)
 
-# dd = nome pro valor do divisor
+dd = nome pro valor do divisor
+'''
 
 
-# Versão definitiva
+# Versão definitiva:
+
 
 def divisao_equilibrada(n, d, nn='x', dd=''):
     q = n // d
@@ -15,21 +18,39 @@ def divisao_equilibrada(n, d, nn='x', dd=''):
     a = q + 1
 
     if r == 0:
-        return f'{q} {nn} {d} {dd}'
+        return f'{q} {nn} {d} {dd}\n'
     
     if isinstance(n, float) or isinstance(d, float):
         q = n / d
-        return f'{q} {nn} {d} {dd}'
+        return f'{q} {nn} {d} {dd}\n'
 
-    return f'\n{q} {nn} {(d - r)} {dd}\n{a} {nn} {r} {dd}'
+    return f'{q} {nn} {(d - r)} {dd}\n{a} {nn} {r} {dd}\n'
 
 
 # teste_resultado = divisao_equilibrada(10, 3)
 # print(teste_resultado)
 
 
+
+# Outras funções para minha calculadora:
+
+
+import os
+
+
+def limpar_tela():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def radiciacao(x, y):
+    potencia = 1 / y
+    raiz = x ** potencia
+    return raiz
+
+
 def lista_comandos():
-    print('\nOperadores disponíveis:')
+    limpar_tela()
+    print('Operadores disponíveis:')
     print(' +  : Adição')
     print(' -  : Subtração')
     print(' *  : Multiplicação')
@@ -38,14 +59,11 @@ def lista_comandos():
     print(' // : Divisão inteira')
     print(' %  : Módulo')
     print(' %% : Divisão equilibrada')
-    print('\nDica para calcular uma raiz quadrada:')
-    print('Operador: **\nPróximo número: 0.5')
-    print('\nPara calcular com outras potências, troque 0.5 pelo resultado')
-    print('da divisão de 1 pelo número da potência que você quer.\n')
+    print(' &  : Radiciação')
 
     print('\nComandos disponíveis:')
     print(' L  : Exibir lista de operadores e comandos disponíveis')
     print(' H  : Histórico da operação')
     print(' R  : Resetar histórico')
     print(' F  : Finalizar operação')
-    print(' P  : Parar/encerrar o programa')
+    print(' P  : Parar/encerrar o programa\n')
