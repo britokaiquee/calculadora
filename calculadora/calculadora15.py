@@ -21,7 +21,8 @@ def main():
 
             switch_comando = {
                 'l': lista_comandos,
-                'p': sys.exit,
+                'p': lambda: (limpar_tela(), print('Programa encerrado.\n'), \
+                              sys.exit()),
                 'h': exibir_historico,
                 'r': lambda: (historico.clear(), limpar_tela(), \
                             print('Histórico apagado.')),
@@ -42,13 +43,14 @@ def main():
                 continue
 
             # Solicita o próximo número
-            prox_num = obter_numero('\nPróximo número:\n')
+            print()
+            prox_num = obter_numero('Próximo número:\n')
 
             # Executa a operação e atualiza o número
             resultado = executar_operacao(numero, operador, prox_num)
 
             limpar_tela()
-            print(f'Resultado:\n{resultado}')
+            print(f'Resultado:\n{resultado}\n')
 
             if operador == '%%':
                 break
@@ -64,7 +66,7 @@ def obter_numero(mensagem):
             return float(input(mensagem))
         except ValueError:
             limpar_tela()
-            print('\nValor inválido. Tente novamente.')
+            print('Valor inválido. Tente novamente.\n')
 
 
 # Função para executar a operação matemática
@@ -81,7 +83,7 @@ def executar_operacao(x, operador, y):
         '%%': lambda: divisao_equilibrada(
             formatar(x), formatar(y), 
             input('\nNome e/ou separador (ou enter): ') or 'x',
-            input('Nome 2 (ou enter): ') or ''
+            input('Nome 2 (ou enter): ')
             ),
         '&': lambda: radiciacao(x, y)
     }
@@ -112,7 +114,10 @@ def exibir_historico():
     print('\nHistórico das operações:')
     for i, operacao in enumerate(historico, 1):
         num_anterior, op, prox_num, resultado = operacao
-        print(f'\n{i}. {num_anterior} {op} {prox_num} = {resultado}')
+        print(f'{i}. {num_anterior} {op} {prox_num} = {resultado}\n')
+
+    if historico == []:
+        print('Histórico vazio.')
 
 
 # Função para limpar a tela, compatível com Windows e Unix-based OS

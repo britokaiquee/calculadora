@@ -24,7 +24,7 @@ def divisao_equilibrada(n, d, nn='x', dd=''):
         q = n / d
         return f'{q} {nn} {d} {dd}\n'
 
-    return f'{q} {nn} {(d - r)} {dd}\n{a} {nn} {r} {dd}\n'
+    return f'\n{q} {nn} {(d - r)} {dd}\n{a} {nn} {r} {dd}\n'
 
 
 # teste_resultado = divisao_equilibrada(10, 3)
