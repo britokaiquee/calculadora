@@ -87,7 +87,6 @@ def exibir_historico():
 
     for i, operacao in enumerate(historico, 1):
         num_anterior, op, prox_num, resultado = operacao
-
         print(f'\n{i}. {num_anterior} {op} {prox_num} = {resultado}')
 
 

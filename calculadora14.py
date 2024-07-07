@@ -172,3 +172,4 @@ while True:
 
         # Atualiza o número para a próxima iteração
         numero = resultado
+        

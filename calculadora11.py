@@ -118,3 +118,4 @@ def main():
 # Executa a função principal se o script for executado diretamente
 if __name__ == "__main__":
     main()
+    
