@@ -1,7 +1,4 @@
 venv/
-__pycache__/
-termo_palavras.txt
-termo.py
 testes.py
 vinculum.py
 conta_elemento.py
