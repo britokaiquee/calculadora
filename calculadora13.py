@@ -1,11 +1,10 @@
 import os
 import sys
-from formula_brito import divisao_equilibrada as fb, lista_comandos, radiciacao
 
 
-print('Calculadora 14.0')
+print('Calculadora v13')
 
-operadores = ['+', '-', '*', '**', '/', '//', '%', '%%', '&']
+operadores = ['+', '-', '*', '**', '/', '//', '%', '%%']
 
 # Lista para armazenar o histórico das operações
 historico = []
@@ -44,12 +43,11 @@ def executar_operacao(x, operador, y):
         '/': lambda: x / y,
         '//': lambda: x // y,
         '%': lambda: x % y,
-        '%%': lambda: fb(
+        '%%': lambda: divisao_equilibrada(
             formatar(x), formatar(y), input(
                 '\nNome e/ou separador (ou enter): ') or 'x', input(
                     'Nome 2 (ou enter): ')
-                    ),
-        '&': lambda: radiciacao(x, y)
+        )
     }
 
     try:
@@ -65,6 +63,23 @@ def executar_operacao(x, operador, y):
         return '\nErro: é impossível dividir por zero.'
 
 
+# Função do meu operador da divisão equilibrada atualizada
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+    next = quociente + 1
+
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    if isinstance(dividendo, float) or isinstance(divisor, float):
+        quociente = dividendo / divisor
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    return f'\n{quociente} {n1} {(divisor
+                                  - resto)} {n2}\n{next} {n1} {resto} {n2}'
+
+
 # Função para exibir o histórico das operações
 def exibir_historico():
     limpar_tela()
@@ -74,6 +89,25 @@ def exibir_historico():
         num_anterior, op, prox_num, resultado = operacao
 
         print(f'\n{i}. {num_anterior} {op} {prox_num} = {resultado}')
+
+
+def lista_comandos():
+    limpar_tela()
+    print('Operadores disponíveis:')
+    print(' +  : Adição')
+    print(' -  : Subtração')
+    print(' *  : Multiplicação')
+    print(' ** : Exponenciação')
+    print(' /  : Divisão')
+    print(' // : Divisão inteira')
+    print(' %  : Módulo')
+    print(' %% : Divisão equilibrada')
+    print('\nComandos disponíveis:')
+    print(' L  : Exibir lista de operadores e comandos disponíveis')
+    print(' H  : Histórico das operações')
+    print(' R  : Resetar histórico')
+    print(' F  : Finalizar operação (após ter enviado o 1º número)')
+    print(' P  : Parar o programa\n')
 
 
 while True:

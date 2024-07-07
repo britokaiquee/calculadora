@@ -1,23 +1,12 @@
 import os
 import sys
-from formula_brito_beta import formula_brito as fb
-
-print('Calculadora 12.0')
-
-operadores = ['+', '-', '*', '**', '/', '//', '%', '%%']
-
-# Lista para armazenar o histórico das operações
-historico = []
 
 # Função para limpar a tela, compatível com Windows e Unix-based OS
-
-
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
 
+
 # Função para obter um número do usuário com tratamento de erro
-
-
 def obter_numero(mensagem):
     while True:
         try:
@@ -26,9 +15,15 @@ def obter_numero(mensagem):
             limpar_tela()
             print('\nValor inválido. Tente novamente.')
 
+
+# Função para verificar se o número é inteiro ou float
+def formatar(numero):
+    if isinstance(numero, float) and numero.is_integer():
+        return int(numero)
+    return numero
+
+
 # Função para executar a operação matemática
-
-
 def executar_operacao(x, operador, y):
     # Dicionário de operadores e suas funções correspondentes
     switch_operador = {
@@ -39,42 +34,88 @@ def executar_operacao(x, operador, y):
         '/': lambda: x / y,
         '//': lambda: x // y,
         '%': lambda: x % y,
-        '%%': lambda: fb(int(x), int(y))
+        '%%': lambda: divisao_equilibrada(
+            formatar(x), formatar(y), input(
+                '\nNome e/ou separador (ou enter): ') or 'x', input(
+                    'Nome 2 (ou enter): ')
+                    ),
+        '&': lambda: radiciacao(x, y)
     }
 
     try:
         if operador in switch_operador:
             resultado = switch_operador[operador]()
             # Verificação para evitar floats desnecessários
-            if isinstance(resultado, float) and resultado.is_integer():
-                resultado = int(resultado)
+            resultado = formatar(resultado)
             # Adiciona a operação ao histórico
-            historico.append((x, operador, y, resultado))
+            historico.append((formatar(x), operador, formatar(y), resultado))
             return resultado
 
     except ZeroDivisionError:
         return '\nErro: é impossível dividir por zero.'
 
+
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+    next = quociente + 1
+
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    if isinstance(dividendo, float) or isinstance(divisor, float):
+        quociente = dividendo / divisor
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    return f'\n{quociente} {n1} {(divisor
+                                  - resto)} {n2}\n{next} {n1} {resto} {n2}'
+
+
+# Função para radiciação
+def radiciacao(x, y):
+    potencia = 1 / y
+    raiz = x ** potencia
+    return raiz
+
+
 # Função para exibir o histórico das operações
-
-
 def exibir_historico():
     limpar_tela()
     print('\nHistórico das operações:')
 
     for i, operacao in enumerate(historico, 1):
         num_anterior, op, prox_num, resultado = operacao
+        print(f'\n{i}. {num_anterior} {op} {prox_num} = {resultado}')
 
-        # Formatação dos números para evitar floats desnecessários
-        num_anterior = int(num_anterior) if isinstance(
-            num_anterior, float) and num_anterior.is_integer() else num_anterior
-        prox_num = int(prox_num) if isinstance(
-            prox_num, float) and prox_num.is_integer() else prox_num
-        resultado = int(resultado) if isinstance(
-            resultado, float) and resultado.is_integer() else resultado
 
-        print(f'{i}. {num_anterior} {op} {prox_num} = {resultado}')
+# Função para listar os comandos disponíveis
+def lista_comandos():
+    limpar_tela()
+    print('Operadores disponíveis:')
+    print(' +  : Adição')
+    print(' -  : Subtração')
+    print(' *  : Multiplicação x')
+    print(' ** : Exponenciação ^')
+    print(' /  : Divisão ÷')
+    print(' // : Divisão inteira ÷')
+    print(' %  : Módulo (resto) ÷')
+    print(' %% : Divisão equilibrada ÷')
+    print(' &  : Radiciação √ (1º número é o radicando e o próximo é o índice)')
 
+    print('\nComandos disponíveis:')
+    print(' L  : Exibir lista de operadores e comandos disponíveis')
+    print(' H  : Histórico das operações')
+    print(' R  : Resetar histórico')
+    print(' F  : Finalizar operação (após ter enviado o 1º número)')
+    print(' P  : Parar o programa\n')
+
+
+print('Calculadora v14')
+
+operadores = ['+', '-', '*', '**', '/', '//', '%', '%%', '&']
+
+# Lista para armazenar o histórico das operações
+historico = []
 
 while True:
     # Solicita o primeiro número
@@ -89,22 +130,7 @@ while True:
 
         elif operador == 'l':
             limpar_tela()
-            print('\nOperadores disponíveis:')
-            print(' +  : Adição')
-            print(' -  : Subtração')
-            print(' *  : Multiplicação')
-            print(' ** : Exponenciação')
-            print(' /  : Divisão')
-            print(' // : Divisão inteira')
-            print(' %  : Módulo')
-            print(' %% : Divisão equilibrada')
-
-            print('\nComandos disponíveis:')
-            print(' L  : Exibir lista de operadores e comandos disponíveis')
-            print(' H  : Histórico da operação')
-            print(' R  : Resetar histórico')
-            print(' F  : Finalizar operação')
-            print(' P  : Parar/encerrar o programa')
+            lista_comandos()
             continue
 
         elif operador == 'p':

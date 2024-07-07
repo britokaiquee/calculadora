@@ -3,7 +3,7 @@ while True:
         entrada = input(
             '\nDigite "I" para iniciar a operação ou "P" para parar: ')
         if entrada.lower() == 'i':
-            print('\nCalculadora 3.0\n')
+            print('\nCalculadora v3\n')
             num1 = float(input('Primeiro número:\n'))
             operador = input('Operador:\n')
             if operador in ['+', '-', '*', '/', '//', '**', '%']:

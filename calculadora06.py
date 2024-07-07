@@ -1,19 +1,36 @@
 import os
-from formula_brito_beta import formula_brito as fb
+
+'''
+n = divideNdo | d = Divisor | q = Quociente | r = Resto | x = resultado
+
+nn = nome pro valor do dividendo + separador ("x" é o argumento padrão para
+o separador)
+
+dd = nome pro valor do divisor
+'''
+
+def divisao_equilibrada(n, d, nn='x', dd=''):
+    q = n // d
+    r = n % d
+
+    if r == 0:
+        return f'{q} {nn} {d} {dd}'
+
+    return f'{q} {nn} {(d - r)} {dd}\n{(q + 1)} {nn} {r} {dd}'
 
 
 while True:
     try:
         entrada = input(
             '\nDigite "I" para iniciar a operação ou "P" para parar: '
-            )
+        )
 
         if entrada.lower() == 'i':
-            print('\nCalculadora 6.0\n')
+            print('\nCalculadora v6\n')
             resultado = float(input('Primeiro número:\n'))
 
             while True:
-                operador = input('Operador (ou "F" para finalizar):\n')
+                operador = input('\nOperador (ou "F" para finalizar):\n')
 
                 if operador.lower() == 'f':
                     break
@@ -35,10 +52,12 @@ while True:
                     elif operador == '%':
                         resultado %= num
                     elif operador == '%%':
+                        os.system('cls')
                         print(
                             f'\nResultado:\
-                            \n{fb(int(resultado), int(num))}'
-                            )
+                            \n{divisao_equilibrada(int(resultado), int(num))}'
+                        )
+                        break
 
                 else:
                     print('Erro: operador inválido.')

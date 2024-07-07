@@ -5,7 +5,7 @@ while True:
         entrada = input(
 '\nDigite "I" para iniciar a operação ou "P" para parar, e pressione Enter. \n')
         if entrada == 'I' or entrada == 'i':
-            print('\nCalculadora 2.0\n')
+            print('\nCalculadora v2\n')
             num1 = float(input('Primeiro número:\n'))
             num2 = float(input('Segundo número:\n'))
             operador = input('Operador:\n')

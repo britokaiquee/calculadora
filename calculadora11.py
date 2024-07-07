@@ -1,8 +1,8 @@
 import os
 import sys
-from formula_brito_beta import formula_brito as fb
 
-print('Calculadora 11.0')
+
+print('Calculadora v11')
 
 operadores = ['+', '-', '*', '**', '/', '//', '%', '%%']
 
@@ -33,7 +33,7 @@ def executar_operacao(numero, operador, prox_num):
         '/': lambda: numero / prox_num,
         '//': lambda: numero // prox_num,
         '%': lambda: numero % prox_num,
-        '%%': lambda: fb(int(numero), int(prox_num))
+        '%%': lambda: divisao_equilibrada(int(numero), int(prox_num))
     }
 
     try:
@@ -42,6 +42,17 @@ def executar_operacao(numero, operador, prox_num):
 
     except ZeroDivisionError:
         return '\nErro: é impossível dividir por zero.'
+
+
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    return f'{quociente} {n1} {(divisor - resto)} {n2}\n{(
+        quociente + 1)} {n1} {resto} {n2}'
 
 
 # Função principal que controla o fluxo do programa

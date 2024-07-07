@@ -1,7 +1,6 @@
 import os
-from formula_brito_beta import formula_brito as fb
 
-print('\nCalculadora 10.0')
+print('\nCalculadora v10')
 
 
 # Função para limpar a tela, compatível com Windows e Unix-based OS
@@ -37,7 +36,8 @@ def executar_operacao(numero, operador, prox_num):
             return switch_operador[operador]()
         elif operador == '%%':
             limpar_tela()
-            print(f'Resultado:\n{fb(int(numero), int(prox_num))}')
+            print(f'Resultado:\n{divisao_equilibrada(
+                int(numero), int(prox_num))}')
             main()
         else:
             return 'Operador inválido'
@@ -46,14 +46,15 @@ def executar_operacao(numero, operador, prox_num):
         return '\nErro: é impossível dividir por zero.'
 
 
-# def divisao_equilibrada(n, d, nn='x', dd=''):
-#     q = n // d
-#     r = n % d
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
 
-#     if r == 0:
-#         return f'{q} {nn} {(d - r)} {dd}'
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
 
-#     return f'{q} {nn} {(d - r)} {dd}\n{(q + 1)} {nn} {r} {dd}'
+    return f'{quociente} {n1} {(divisor - resto)} {n2}\n{(
+        quociente + 1)} {n1} {resto} {n2}'
 
 
 # Função principal que controla o fluxo do programa

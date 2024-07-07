@@ -1,5 +1,4 @@
 import os
-from formula_brito_beta import formula_brito as fb
 
 
 # Função para limpar a tela, compatível com Windows e Unix-based OS
@@ -35,8 +34,19 @@ def executar_operacao(numero, operador, prox_num):
     # Caso o operador seja '%%', executa a função da formula_brito
     elif operador == '%%':
         limpar_tela()
-        print(f'Resultado:\n{fb(int(numero), int(prox_num))}')
+        print(f'Resultado:\n{divisao_equilibrada(int(numero), int(prox_num))}')
         main()
+
+
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    return f'{quociente} {n1} {(divisor - resto)} {n2}\n{(
+        quociente + 1)} {n1} {resto} {n2}'
 
 
 # Função principal que controla o fluxo do programa
@@ -49,7 +59,7 @@ def main():
 
         # Inicia a operação
         if entrada == 'i':
-            print('\nCalculadora 9.0\n')
+            print('\nCalculadora v9\n')
             numero = obter_numero('Primeiro número:\n')
 
             while True:

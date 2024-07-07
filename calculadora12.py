@@ -1,17 +1,19 @@
 import os
 import sys
-from formula_brito import divisao_equilibrada as fb, lista_comandos
 
-print('Calculadora 13.0')
+
+print('Calculadora v12')
 
 operadores = ['+', '-', '*', '**', '/', '//', '%', '%%']
 
 # Lista para armazenar o histórico das operações
 historico = []
 
+
 # Função para limpar a tela, compatível com Windows e Unix-based OS
 def limpar_tela():
     os.system('cls' if os.name == 'nt' else 'clear')
+
 
 # Função para obter um número do usuário com tratamento de erro
 def obter_numero(mensagem):
@@ -22,11 +24,6 @@ def obter_numero(mensagem):
             limpar_tela()
             print('\nValor inválido. Tente novamente.')
 
-# Função para verificar se o número é inteiro ou float
-def formatar(numero):
-    if isinstance(numero, float) and numero.is_integer():
-        return int(numero)
-    return numero
 
 # Função para executar a operação matemática
 def executar_operacao(x, operador, y):
@@ -39,24 +36,33 @@ def executar_operacao(x, operador, y):
         '/': lambda: x / y,
         '//': lambda: x // y,
         '%': lambda: x % y,
-        '%%': lambda: fb(
-            formatar(x), formatar(y), input(
-                '\nNome e/ou separador (ou enter): ') or 'x', input(
-                    'Nome 2 (ou enter): ')
-                    )
+        '%%': lambda: divisao_equilibrada(int(x), int(y))
     }
 
     try:
         if operador in switch_operador:
             resultado = switch_operador[operador]()
             # Verificação para evitar floats desnecessários
-            resultado = formatar(resultado)
+            if isinstance(resultado, float) and resultado.is_integer():
+                resultado = int(resultado)
             # Adiciona a operação ao histórico
-            historico.append((formatar(x), operador, formatar(y), resultado))
+            historico.append((x, operador, y, resultado))
             return resultado
 
     except ZeroDivisionError:
         return '\nErro: é impossível dividir por zero.'
+
+
+def divisao_equilibrada(dividendo, divisor, n1='x', n2=''):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+
+    if resto == 0:
+        return f'{quociente} {n1} {divisor} {n2}'
+
+    return f'{quociente} {n1} {(divisor - resto)} {n2}\n{(
+        quociente + 1)} {n1} {resto} {n2}'
+
 
 # Função para exibir o histórico das operações
 def exibir_historico():
@@ -66,7 +72,16 @@ def exibir_historico():
     for i, operacao in enumerate(historico, 1):
         num_anterior, op, prox_num, resultado = operacao
 
-        print(f'\n{i}. {num_anterior} {op} {prox_num} = {resultado}')
+        # Formatação dos números para evitar floats desnecessários
+        num_anterior = int(num_anterior) if isinstance(
+            num_anterior, float) and num_anterior.is_integer() else num_anterior
+        prox_num = int(prox_num) if isinstance(
+            prox_num, float) and prox_num.is_integer() else prox_num
+        resultado = int(resultado) if isinstance(
+            resultado, float) and resultado.is_integer() else resultado
+
+        print(f'{i}. {num_anterior} {op} {prox_num} = {resultado}')
+
 
 while True:
     # Solicita o primeiro número
@@ -81,7 +96,22 @@ while True:
 
         elif operador == 'l':
             limpar_tela()
-            lista_comandos()
+            print('\nOperadores disponíveis:')
+            print(' +  : Adição')
+            print(' -  : Subtração')
+            print(' *  : Multiplicação')
+            print(' ** : Exponenciação')
+            print(' /  : Divisão')
+            print(' // : Divisão inteira')
+            print(' %  : Módulo')
+            print(' %% : Divisão equilibrada')
+
+            print('\nComandos disponíveis:')
+            print(' L  : Exibir lista de operadores e comandos disponíveis')
+            print(' H  : Histórico da operação')
+            print(' R  : Resetar histórico')
+            print(' F  : Finalizar operação')
+            print(' P  : Parar/encerrar o programa')
             continue
 
         elif operador == 'p':
