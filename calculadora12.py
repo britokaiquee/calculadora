@@ -2,7 +2,7 @@ import os
 import sys
 
 
-print('Calculadora v12')
+print('Calculadora v0.12')
 
 operadores = ['+', '-', '*', '**', '/', '//', '%', '%%']
 

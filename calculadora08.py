@@ -28,7 +28,7 @@ while True:
         os.system('cls')
 
         if entrada.lower() == 'i':
-            print('\nCalculadora v8\n')
+            print('\nCalculadora v0.8\n')
             while True:
                 try:
                     resultado = float(input('Primeiro número:\n'))

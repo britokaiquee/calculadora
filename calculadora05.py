@@ -3,7 +3,7 @@ while True:
         entrada = input(
             '\nDigite "I" para iniciar a operação ou "P" para parar: ')
         if entrada.lower() == 'i':
-            print('\nCalculadora v5\n')
+            print('\nCalculadora v0.5\n')
             resultado = float(input('Primeiro número:\n'))
             while True:
                 if resultado.is_integer():

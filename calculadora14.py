@@ -110,7 +110,7 @@ def lista_comandos():
     print(' P  : Parar o programa\n')
 
 
-print('Calculadora v14')
+print('Calculadora v0.14')
 
 operadores = ['+', '-', '*', '**', '/', '//', '%', '%%', '&']
 

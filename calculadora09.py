@@ -59,7 +59,7 @@ def main():
 
         # Inicia a operação
         if entrada == 'i':
-            print('\nCalculadora v9\n')
+            print('\nCalculadora v0.9\n')
             numero = obter_numero('Primeiro número:\n')
 
             while True:

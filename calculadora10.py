@@ -1,6 +1,6 @@
 import os
 
-print('\nCalculadora v10')
+print('\nCalculadora v0.10')
 
 
 # Função para limpar a tela, compatível com Windows e Unix-based OS

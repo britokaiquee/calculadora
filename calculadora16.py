@@ -9,8 +9,8 @@ def limpar_tela():
 # Função principal
 def main():
     try:
-        print('Calculadora v16\n')
-        print('L = listar operadores e comandos.\n\n')
+        print('Calculadora v1.1 - by: Kaique.\n')
+        print('"l" para listar operadores e comandos.\n\n')
 
         while True:
             # Solicita o primeiro número ou comando
@@ -40,7 +40,7 @@ def main():
                 resultado = executar_operacao(numero, operador, prox_num)
 
                 limpar_tela()
-                print('L = listar operadores e comandos.\n')
+                print('"l" para listar operadores e comandos.\n')
                 print(f'Resultado:\n{resultado}\n\n')
 
                 if operador == '%%':
@@ -66,7 +66,7 @@ def executar_operacao(x, operador, y):
         '/': lambda: x / y,
         '//': lambda: x // y,
         '%': lambda: x % y,
-        '%%': lambda: divisao_equilibrada(x, y),
+        '%%': lambda: divisao_equilibrada(formatar(x), formatar(y)),
         '&': lambda: radiciacao(x, y)
     }
 
@@ -105,34 +105,21 @@ def formatar(numero):
 
 
 # Fórmula criada por mim
-def divisao_equilibrada(x, y):
-    def calculo_div_e(dividendo, divisor, n1='', s='x', n2=''):
-        quociente = dividendo // divisor
-        resto = dividendo % divisor
-        next = quociente + 1
+def divisao_equilibrada(dividendo, divisor):
+    quociente = dividendo // divisor
+    resto = dividendo % divisor
+    next = quociente + 1
+    
+    # guard clause pra retornar uma divisão inteira caso não haja resto
+    if resto == 0:
+        return f'{quociente} x {divisor}'
 
-        if resto == 0:
-            return f'{quociente} {n1} {divisor} {n2}'
+    # guard clause pra retornar uma divisão normal caso haja números flutuantes
+    if isinstance(dividendo, float) or isinstance(divisor, float):
+        quociente = dividendo / divisor
+        return f'{quociente} x {divisor}'
 
-        if isinstance(dividendo, float) or isinstance(divisor, float):
-            quociente = dividendo / divisor
-            return f'{quociente} {n1} {divisor} {n2}'
-
-        return f'\n{quociente} {n1}{s} {(divisor - resto)} {n2}\n{next} {n1}{s}\
-{resto} {n2}'
-
-    resultado = calculo_div_e(formatar(x), formatar(y))
-
-    nomes = input('\nDeseja pôr nomes? [s]\n').lower()
-    if nomes == 's':
-        nome1 = input('\nNome 1 (ou enter): ')
-        nome1_f = f'{nome1} ' if nome1 != '' else ''
-        separador = input('Separador: ') or 'x'
-        nome2 = input('Nome 2 (ou enter): ')
-        resultado = calculo_div_e(formatar(x), formatar(y),
-                                  nome1_f, separador, nome2)
-
-    return resultado
+    return f'\n{quociente} x {(divisor - resto)}\n{next} x {resto}'
 
 
 # Raiz quadrada, cúbica, etc
@@ -147,7 +134,7 @@ def radiciacao(x, y):
 
 def processar_comando(comando):
     switch_comando = {
-        'l': lista_comandos,
+        'l': listar_comandos,
         'h': exibir_historico,
         'a': apagar_historico,
         'r': reiniciar_calculadora,
@@ -159,7 +146,7 @@ def processar_comando(comando):
     return False
 
 
-def lista_comandos():
+def listar_comandos():
     limpar_tela()
     print('Operadores disponíveis:')
     print('+  | Adição')
@@ -174,10 +161,10 @@ def lista_comandos():
     print('\nObs: o primeiro número passa a ser o resultado após a 1ª conta,')
     print('mas você pode usar o comando "r" pra resetar.')
     print('\nComandos disponíveis:')
-    print('L  | Lista de operadores e comandos disponíveis')
-    print('H  | Histórico das operações')
-    print('A  | Apagar histórico')
-    print('R  | Reiniciar calculadora (finalizar operação)')
+    print('l  | Lista de operadores e comandos disponíveis')
+    print('h  | Histórico das operações')
+    print('a  | Apagar histórico')
+    print('r  | Reiniciar calculadora (finalizar operação)')
     print('\nCTRL+C | Close\n\n')
 
 

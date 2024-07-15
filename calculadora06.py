@@ -26,7 +26,7 @@ while True:
         )
 
         if entrada.lower() == 'i':
-            print('\nCalculadora v6\n')
+            print('\nCalculadora v0.6\n')
             resultado = float(input('Primeiro número:\n'))
 
             while True:

@@ -1,11 +1,9 @@
-# Versão atualizada com números flutuantes:
-
 while True:
     try:
         entrada = input(
 '\nDigite "I" para iniciar a operação ou "P" para parar, e pressione Enter. \n')
         if entrada == 'I' or entrada == 'i':
-            print('\nCalculadora v2\n')
+            print('\nCalculadora v0.2\n')
             num1 = float(input('Primeiro número:\n'))
             num2 = float(input('Segundo número:\n'))
             operador = input('Operador:\n')

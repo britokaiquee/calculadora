@@ -3,7 +3,7 @@ while True:
         entrada = input(
             '\nDigite "I" para iniciar a operação ou "P" para parar: ')
         if entrada == 'I' or entrada == 'i':
-            print('\nCalculadora v1\n')
+            print('\nCalculadora v0.1\n')
             num1 = int(input('Digite o primeiro número: '))
             operador = input('Digite o operador: ')
             num2 = int(input('Digite o segundo número: '))
