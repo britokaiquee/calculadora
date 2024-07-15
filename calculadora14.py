@@ -106,7 +106,7 @@ def lista_comandos():
     print(' L  : Exibir lista de operadores e comandos disponíveis')
     print(' H  : Histórico das operações')
     print(' R  : Resetar histórico')
-    print(' F  : Finalizar operação (após ter enviado o 1º número)')
+    print(' F  : Finalizar operação (só funciona com o operador)')
     print(' P  : Parar o programa\n')
 
 
