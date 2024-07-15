@@ -52,9 +52,7 @@ def main():
     except KeyboardInterrupt:
         limpar_tela()
 
-
 ################################ OPERAÇÃO ######################################
-
 
 def executar_operacao(x, operador, y):
     # Dicionário de operadores e suas funções correspondentes
@@ -100,9 +98,7 @@ def formatar(numero):
         return int(numero)
     return numero
 
-
 ############################ OPERADORES CRIADOS ################################
-
 
 # Fórmula criada por mim
 def divisao_equilibrada(dividendo, divisor):
@@ -128,9 +124,7 @@ def radiciacao(x, y):
     raiz = x ** potencia
     return raiz
 
-
 ################################# COMANDOS #####################################
-
 
 def processar_comando(comando):
     switch_comando = {
@@ -165,7 +159,7 @@ def listar_comandos():
     print('h  | Histórico das operações')
     print('a  | Apagar histórico')
     print('r  | Reiniciar calculadora (finalizar operação)')
-    print('\nCTRL+C | Close\n\n')
+    print('\nCtrl+c | Close\n\n')
 
 
 # Lista para armazenar o histórico das operações
@@ -197,9 +191,7 @@ def reiniciar_calculadora():
     limpar_tela()
     main()
 
-
 ################################################################################
-
 
 # Executa a função principal se o script for executado diretamente
 if __name__ == "__main__":

@@ -8,7 +8,7 @@ import os
 def main():
     # Versão em que compilei pela primeira vez
     print('\nCalculadora v1.0 - by: Kaique.\n')
-    print('L = listar operadores e comandos.\n\n')
+    print('"l" para listar operadores e comandos.\n\n')
 
     while True:
         # Solicita o primeiro número ou comando
@@ -23,7 +23,7 @@ def main():
 
             if operador == 'f':
                 limpar_tela()
-                print('L = listar operadores e comandos.\n')
+                print('"l" para listar operadores e comandos.\n')
                 break
 
             operadores = ['+', '-', '*', '**', '/', '//', '%', '%%', '&']
@@ -163,11 +163,11 @@ def lista_comandos():
     print(' %% : Divisão equilibrada ÷')
     print(' &  : Radiciação √ (1º número é o radicando e o próximo é o índice)')
     print('\nComandos disponíveis:')
-    print(' L  : Exibir lista de operadores e comandos disponíveis')
-    print(' H  : Histórico das operações')
-    print(' R  : Resetar histórico')
-    print(' F  : Finalizar operação (após ter enviado o 1º número)')
-    print(' P  : Parar o programa\n\n')
+    print(' l  : Exibir lista de operadores e comandos disponíveis')
+    print(' h  : Histórico das operações')
+    print(' r  : Resetar histórico')
+    print(' f  : Finalizar operação (após ter enviado o 1º número)')
+    print(' p  : Parar o programa\n\n')
 
 
 # Lista para armazenar o histórico das operações
