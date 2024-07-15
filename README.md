@@ -4,4 +4,4 @@ Para criar um arquivo executavel (compilar) de uma versão, siga os passos:
 3. Digite no terminal:
   pyinstaller --onefile --icon=calculadora.ico nome_do_arquivo.py
 
-Obs: troque "nome_do_arquivo.py" pelo nome do arquivo que você quer.
+Obs: troque "nome_do_arquivo.py" pelo nome do arquivo que você quer. E baixe o arquivo do ícone da calculadora antes.
