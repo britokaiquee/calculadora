@@ -7,7 +7,7 @@ import os
 
 def main():
     # Versão em que compilei pela primeira vez
-    print('\nCalculadora v1.0 - by: Kaique Brito\n')
+    print('\nCalculadora v1.0 - by: Kaique.\n')
     print('L = listar operadores e comandos.\n\n')
 
     while True:
